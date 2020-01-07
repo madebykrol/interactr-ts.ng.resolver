@@ -17,7 +17,7 @@ export const SEARCH_USECASE
 
 export function resolverFactoryFunction () {
 
-  const resolver = new NgInteractorResolver(ServiceLocator.injector);
+  const resolver = new NgResolver(ServiceLocator.injector);
   
   resolver.registerInjectionToken(SEARCH_USECASE, SearchtUseCase.name);
 
