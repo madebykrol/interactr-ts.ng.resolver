@@ -13,7 +13,7 @@ export class NgResolver implements Resolver {
   }
 
   resolveMiddleware<TUseCase extends UseCase<TOutputPort>, TOutputPort>(usecase: TUseCase): Array<Middleware<TUseCase, TOutputPort>> {
-    return this.resolveMultiple<Middleware<TUseCase, TOutputPort>>(this.getUseCaseMiddlewareToken('middleware' + usecase.constructor.name));
+    return this.resolveMultiple<Middleware<TUseCase, TOutputPort>>(this.getUseCaseMiddlewareToken(usecase.constructor.name));
   }
 
   resolveInteractor<TUseCase extends UseCase<TOutputPort>, TOutputPort>(usecase: TUseCase): Interactor<TUseCase, TOutputPort> {
@@ -29,8 +29,8 @@ export class NgResolver implements Resolver {
   }
 
   registerMiddlewareInjectionToken<TUseCase, TOutputPort>(token: InjectionToken<Middleware<TUseCase, TOutputPort>>,
-    middlewareTypeName: string): void {
-    this.injectionTokens.set(middlewareTypeName, token);
+    usecaseTypeName: string): void {
+    this.injectionTokens.set('middleware' + usecaseTypeName, token);
   }
 
   registerGlobalMiddlewareInjectionToken(token: InjectionToken<GlobalMiddleware>): void {
@@ -66,6 +66,6 @@ export class NgResolver implements Resolver {
   }
 
   private getUseCaseMiddlewareToken<TUseCase, TOutputPort>(name: string): InjectionToken<Middleware<TUseCase, TOutputPort>> {
-    return <InjectionToken<Middleware<TUseCase, TOutputPort>>>this.injectionTokens.get(name);
+    return <InjectionToken<Middleware<TUseCase, TOutputPort>>>this.injectionTokens.get('middleware' + name);
   }
 }

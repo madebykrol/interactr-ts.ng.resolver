@@ -87,5 +87,54 @@ And finally, we need to register a provider for our interactor with the Angular 
 ```
 
 ## Registrating Middleware
+Token:
+```Typescript
+const SEARCH_PIPELINE =
+  new InjectionToken<Middleware<SearchUseCase, SearchOutputPort>>('searchpipeline');
+```
+Register
+```Typescript
+resolver.registerMiddlewareInjectionToken(SEARCH_PIPELINE, SearchUseCase.name);
+```
+
+Providers: (Multiple)
+```Typescript
+{
+    provide: SEARCH_PIPELINE,
+    useClass: Middleware1,
+    multi: true
+},
+{
+    provide: SEARCH_PIPELINE,
+    useClass: Middleware2,
+    multi: true
+},
+```
 
 ### Global Middleware
+The Injection Token for the blobal pipeline for global middlewares are different from interacts and a use case pipeline in that it they won't be resolved by the resolver using a use case as key
+For that reason all global middleware are registered to the same token so we only need to register one.
+
+Token:
+```Typescript
+const GLOBAL_PIPELINE
+  = new InjectionToken<GlobalMiddleware>('globalpipeline');
+```
+Register
+```Typescript
+ resolver.registerGlobalMiddlewareInjectionToken(GLOBAL_PIPELINE);
+```
+
+Providers: (multiple)
+```Typescript
+{
+    provide: GLOBAL_PIPELINE,
+    useClass: ExceptionMiddleware,
+    multi: true
+},
+{
+    provide: GLOBAL_PIPELINE,
+    useClass: LogMiddleware,
+    multi: true
+}
+```
