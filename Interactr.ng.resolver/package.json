@@ -1,0 +1,19 @@
+{
+  "name": "interactr.ng.resolver",
+  "version": "1.2.1",
+  "description": "Interactr resolver using Angular dependency injection container",
+  "main": "app.js",
+  "author": {
+    "name": "Kristoffer Olsson"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.14",
+    "typescript": "^3.2.2",
+    "@angular/core": "8.2.14",
+    "interactr": "1.2.1"
+  }
+}
