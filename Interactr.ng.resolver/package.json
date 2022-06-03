@@ -13,7 +13,7 @@
   "devDependencies": {
     "@types/node": "^8.0.14",
     "typescript": "^3.2.2",
-    "@angular/core": "8.2.14",
+    "@angular/core": "11.0.5",
     "interactr": "1.2.1"
   }
 }
